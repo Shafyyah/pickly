@@ -10,7 +10,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { userId } = await req.json();
+    const { userId, preferences } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
 
     if (!LOVABLE_API_KEY) {
@@ -37,7 +37,12 @@ Deno.serve(async (req) => {
           },
           {
             role: 'user',
-            content: `It's ${timeOfDay}. Generate 3 spontaneous activity suggestions for someone to do right now. 
+            content: `It's ${timeOfDay}. Generate 3 spontaneous activity suggestions based on these preferences:
+            - Energy level: ${preferences?.energy || 'moderate'}
+            - Social preference: ${preferences?.social || 'flexible'}
+            - Location: ${preferences?.location || 'anywhere'}
+            - Activity type: ${preferences?.type || 'any'}
+            - Budget: ${preferences?.budget || 'flexible'}
             
             Return a JSON object with an "activities" array. Each activity should have:
             - title: string
@@ -45,9 +50,9 @@ Deno.serve(async (req) => {
             - details: object with description (string), duration (string), instructions (array of strings)
             - mindMapNodes: array of objects with label and type (input/context/analysis/final)
             
-            For mindMapNodes, include nodes like: time of day (${timeOfDay}), mood, energy level, location, past preferences, etc.
+            For mindMapNodes, include nodes like: time of day (${timeOfDay}), energy (${preferences?.energy}), social (${preferences?.social}), location (${preferences?.location}), type (${preferences?.type}), budget (${preferences?.budget})
             
-            Keep activities practical and achievable within 10-60 minutes.`
+            Tailor activities to match their preferences exactly.`
           }
         ],
         response_format: { type: 'json_object' }
