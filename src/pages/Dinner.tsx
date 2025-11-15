@@ -26,6 +26,28 @@ const Dinner = () => {
         navigate("/login");
       }
     });
+
+    // Add paste event listener for clipboard images
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const file = items[i].getAsFile();
+          if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onloadend = () => setPreview(reader.result as string);
+            reader.readAsDataURL(file);
+            toast.success("Image pasted from clipboard!");
+          }
+        }
+      }
+    };
+
+    document.addEventListener('paste', handlePaste);
+    return () => document.removeEventListener('paste', handlePaste);
   }, [navigate]);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +152,7 @@ const Dinner = () => {
                 </div>
                 <div>
                   <p className="text-xl font-semibold mb-2">Upload a photo of your fridge</p>
-                  <p className="text-muted-foreground">Click to select an image</p>
+                  <p className="text-muted-foreground">Click to select or paste an image (Ctrl+V / Cmd+V)</p>
                 </div>
               </label>
             </div>
