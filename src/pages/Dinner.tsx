@@ -161,7 +161,7 @@ const Dinner = () => {
                 </div>
                 <div>
                   <p className="text-xl font-semibold mb-2">Upload a photo of your fridge</p>
-                  <p className="text-muted-foreground">Click to select or paste an image (Ctrl+V / Cmd+V)</p>
+                  <p className="text-card-foreground">Click to select or paste an image (Ctrl+V / Cmd+V)</p>
                 </div>
               </label>
             </div>
