@@ -66,7 +66,7 @@ export const SignupForm = () => {
         <button
           type="button"
           onClick={() => navigate("/login")}
-          className="text-primary hover:underline"
+          className="text-card-foreground hover:underline"
         >
           Sign in
         </button>
