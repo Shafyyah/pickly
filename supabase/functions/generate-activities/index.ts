@@ -70,8 +70,47 @@ Deno.serve(async (req) => {
     
     console.log('Generated activities:', result.activities?.length);
 
+    // Generate images for each activity
+    const activitiesWithImages = await Promise.all(
+      result.activities.map(async (activity: any) => {
+        try {
+          const imagePrompt = `${activity.title}: ${activity.summary}. Create a vibrant, engaging image that represents this activity.`;
+          
+          const imageResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              model: 'google/gemini-2.5-flash-image-preview',
+              messages: [
+                {
+                  role: 'user',
+                  content: imagePrompt
+                }
+              ],
+              modalities: ['image', 'text']
+            }),
+          });
+
+          if (imageResponse.ok) {
+            const imageData = await imageResponse.json();
+            const imageUrl = imageData.choices?.[0]?.message?.images?.[0]?.image_url?.url;
+            return { ...activity, imageUrl };
+          } else {
+            console.error('Image generation failed for activity:', activity.title);
+            return activity;
+          }
+        } catch (error) {
+          console.error('Error generating image:', error);
+          return activity;
+        }
+      })
+    );
+
     return new Response(
-      JSON.stringify({ activities: result.activities }),
+      JSON.stringify({ activities: activitiesWithImages }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
