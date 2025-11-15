@@ -80,10 +80,19 @@ export default {
             height: "0",
           },
         },
+        "slow-pan": {
+          "0%": {
+            transform: "scale(1.1) translateX(0)",
+          },
+          "100%": {
+            transform: "scale(1.1) translateX(-5%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slow-pan": "slow-pan 60s ease-in-out infinite alternate",
       },
     },
   },

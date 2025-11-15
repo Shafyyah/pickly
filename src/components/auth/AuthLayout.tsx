@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import wallpaper from "@/assets/wallpaper.png";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -8,13 +9,21 @@ interface AuthLayoutProps {
 
 export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'var(--gradient-subtle)' }}>
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute inset-0 animate-slow-pan">
+        <img 
+          src={wallpaper} 
+          alt="" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+      <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Micro-Decision Helper
+          <h1 className="text-4xl font-bold mb-2 text-white">
+            Pickly
           </h1>
-          <p className="text-muted-foreground">{subtitle}</p>
+          <p className="text-white/80">{subtitle}</p>
         </div>
         
         <div className="bg-card p-8 rounded-2xl" style={{ boxShadow: 'var(--shadow-card)' }}>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChefHat, Sparkles, Search, LogOut } from "lucide-react";
 import { toast } from "sonner";
+import wallpaper from "@/assets/wallpaper.png";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -89,11 +90,19 @@ const Index = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--gradient-subtle)' }}>
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="absolute inset-0 animate-slow-pan">
+        <img 
+          src={wallpaper} 
+          alt="" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Micro-Decision Helper
+          <h1 className="text-4xl font-bold text-white">
+            Pickly
           </h1>
           <Button variant="ghost" onClick={handleSignOut}>
             <LogOut className="w-4 h-4 mr-2" />
