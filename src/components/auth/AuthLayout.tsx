@@ -26,7 +26,7 @@ export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
           <p className="text-white/80">{subtitle}</p>
         </div>
         
-        <div className="bg-card p-8 rounded-2xl" style={{ boxShadow: 'var(--shadow-card)' }}>
+        <div className="bg-card/90 backdrop-blur-md p-8 rounded-2xl border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
           <h2 className="text-2xl font-semibold mb-6 text-card-foreground">{title}</h2>
           {children}
         </div>

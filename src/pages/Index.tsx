@@ -112,7 +112,7 @@ const Index = () => {
 
         <div className="max-w-2xl mx-auto space-y-8">
           {/* Universal Search Bar */}
-          <div className="bg-card rounded-2xl p-6" style={{ boxShadow: 'var(--shadow-card)' }}>
+          <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
             <h2 className="text-2xl font-semibold mb-4">What decision do you need help with?</h2>
             <div className="flex gap-3">
               <Input
@@ -131,7 +131,7 @@ const Index = () => {
 
           {/* Chat History */}
           {showChat && (
-            <div className="bg-card rounded-2xl p-6 space-y-4" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 space-y-4 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {chatHistory.map((message, i) => (
                   <div key={i} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -183,7 +183,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <button
               onClick={() => navigate("/dinner")}
-              className="group bg-card rounded-2xl p-8 text-left transition-all hover:scale-105"
+              className="group bg-card/90 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
               style={{ boxShadow: 'var(--shadow-card)' }}
             >
               <div className="flex items-center gap-4 mb-4">
@@ -199,7 +199,7 @@ const Index = () => {
 
             <button
               onClick={() => navigate("/activity")}
-              className="group bg-card rounded-2xl p-8 text-left transition-all hover:scale-105"
+              className="group bg-card/90 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
               style={{ boxShadow: 'var(--shadow-card)' }}
             >
               <div className="flex items-center gap-4 mb-4">
@@ -215,9 +215,9 @@ const Index = () => {
           </div>
 
           {/* Info Section */}
-          <div className="bg-primary/10 rounded-xl p-6 border border-primary/20">
-            <h4 className="font-semibold mb-2 text-primary">Welcome to smarter decisions</h4>
-            <p className="text-sm text-muted-foreground">
+          <div className="bg-primary/20 backdrop-blur-sm rounded-xl p-6 border border-white/30">
+            <h4 className="font-semibold mb-2 text-white">Welcome to smarter decisions</h4>
+            <p className="text-sm text-white/80">
               Our AI helps you make better choices by analyzing your context, preferences, and history. 
               Every decision includes a visual mind-map showing how we reached our recommendation.
             </p>
