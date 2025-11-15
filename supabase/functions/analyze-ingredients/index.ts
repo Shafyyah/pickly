@@ -20,6 +20,19 @@ Deno.serve(async (req) => {
 
     console.log('Analyzing ingredients from image:', imageUrl);
 
+    // Download image from storage and convert to base64
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) {
+      throw new Error('Failed to download image from storage');
+    }
+    
+    const imageBuffer = await imageResponse.arrayBuffer();
+    const base64Image = btoa(String.fromCharCode(...new Uint8Array(imageBuffer)));
+    const mimeType = imageResponse.headers.get('content-type') || 'image/png';
+    const dataUrl = `data:${mimeType};base64,${base64Image}`;
+
+    console.log('Image converted to base64, sending to AI...');
+
     // Use AI to analyze the image and detect ingredients
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -43,7 +56,7 @@ Deno.serve(async (req) => {
               },
               {
                 type: 'image_url',
-                image_url: { url: imageUrl }
+                image_url: { url: dataUrl }
               }
             ]
           }
