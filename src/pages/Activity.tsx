@@ -11,6 +11,7 @@ const Activity = () => {
   const [loading, setLoading] = useState(false);
   const [activities, setActivities] = useState<any[]>([]);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [pickedIndex, setPickedIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +31,8 @@ const Activity = () => {
     if (!id) return;
 
     setLoading(true);
+    setPickedIndex(null);
+    setExpandedIndex(null);
     try {
       const { data, error } = await supabase.functions.invoke("generate-activities", {
         body: { userId: id },
@@ -78,43 +81,61 @@ const Activity = () => {
 
           {activities.length > 0 && (
             <div className="space-y-6">
-              {activities.map((activity, i) => (
+              {pickedIndex !== null ? (
                 <SuggestionCard
-                  key={i}
-                  title={activity.title}
-                  summary={activity.summary}
-                  details={activity.details}
-                  imageUrl={activity.imageUrl}
-                  onDoIt={() => console.log("Do it")}
+                  title={activities[pickedIndex].title}
+                  summary={activities[pickedIndex].summary}
+                  details={activities[pickedIndex].details}
+                  imageUrl={activities[pickedIndex].imageUrl}
                   onChatMessage={(msg) => console.log("Chat:", msg)}
                   loading={loading}
-                  expanded={expandedIndex === i}
+                  expanded={true}
+                  hideButtons={true}
                 />
-              ))}
-              
-              {/* Action Buttons at the end */}
-              <div className="flex gap-3 pt-4">
-                <Button 
-                  onClick={() => generateActivities()} 
-                  disabled={loading}
-                  variant="outline"
-                  className="flex-1"
-                >
-                  {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-                  Suggest Again
-                </Button>
-                <Button 
-                  onClick={() => {
-                    const randomIndex = Math.floor(Math.random() * activities.length);
-                    setExpandedIndex(randomIndex);
-                    toast.success(`Selected: ${activities[randomIndex].title}`);
-                  }}
-                  disabled={loading}
-                  className="flex-1"
-                >
-                  Pick For Me
-                </Button>
-              </div>
+              ) : (
+                <>
+                  {activities.map((activity, i) => (
+                    <SuggestionCard
+                      key={i}
+                      title={activity.title}
+                      summary={activity.summary}
+                      details={activity.details}
+                      imageUrl={activity.imageUrl}
+                      onDoIt={() => {
+                        setPickedIndex(i);
+                        toast.success(`Let's do: ${activity.title}`);
+                      }}
+                      onChatMessage={(msg) => console.log("Chat:", msg)}
+                      loading={loading}
+                      expanded={expandedIndex === i}
+                    />
+                  ))}
+                  
+                  {/* Action Buttons at the end */}
+                  <div className="flex gap-3 pt-4">
+                    <Button 
+                      onClick={() => generateActivities()} 
+                      disabled={loading}
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                      Suggest Again
+                    </Button>
+                    <Button 
+                      onClick={() => {
+                        const randomIndex = Math.floor(Math.random() * activities.length);
+                        setPickedIndex(randomIndex);
+                        toast.success(`Let's do: ${activities[randomIndex].title}`);
+                      }}
+                      disabled={loading}
+                      className="flex-1"
+                    >
+                      Pick For Me
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
