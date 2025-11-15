@@ -131,7 +131,7 @@ export const SuggestionCard = ({
         {details?.ingredients ? (
           <ChefHat className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
         ) : (
-          <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+          <Sparkles className="w-6 h-6 text-card-foreground flex-shrink-0 mt-1" />
         )}
         <div className="flex-1">
           <h3 className="text-xl font-semibold mb-2">{title}</h3>
@@ -193,8 +193,8 @@ export const SuggestionCard = ({
           )}
 
           {details.tips && (
-            <div className="bg-primary/10 rounded-lg p-3">
-              <p className="text-sm font-medium text-primary">{details.tips}</p>
+            <div className="bg-card/20 rounded-lg p-3">
+              <p className="text-sm font-medium text-card-foreground">{details.tips}</p>
             </div>
           )}
         </div>

@@ -136,7 +136,7 @@ const Index = () => {
                 {chatHistory.map((message, i) => (
                   <div key={i} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {message.role === 'assistant' && (
-                      <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                      <Sparkles className="w-6 h-6 text-card-foreground flex-shrink-0 mt-1" />
                     )}
                     <div className={`flex-1 max-w-[80%] ${message.role === 'user' ? 'text-right' : ''}`}>
                       <div className={`inline-block p-4 rounded-lg ${
