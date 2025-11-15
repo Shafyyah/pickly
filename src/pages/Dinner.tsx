@@ -132,12 +132,12 @@ const Dinner = () => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
       <div className="container mx-auto px-4 py-8 relative z-10">
-        <Button variant="ghost" onClick={() => navigate("/")} className="mb-6 text-white hover:bg-white/20">
+        <Button variant="ghost" onClick={() => navigate("/")} className="mb-6 text-foreground hover:bg-muted">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
         </Button>
 
-        <h1 className="text-4xl font-bold mb-8 text-white">
+        <h1 className="text-4xl font-bold mb-8 text-foreground">
           What Should I Cook Tonight?
         </h1>
 

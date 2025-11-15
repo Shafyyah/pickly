@@ -101,10 +101,10 @@ const Index = () => {
       </div>
       <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="flex justify-between items-center mb-12">
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-4xl font-bold text-foreground">
             Pickly
           </h1>
-          <Button variant="ghost" onClick={handleSignOut}>
+          <Button variant="ghost" onClick={handleSignOut} className="text-foreground hover:text-foreground">
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out
           </Button>
@@ -215,9 +215,9 @@ const Index = () => {
           </div>
 
           {/* Info Section */}
-          <div className="bg-primary/20 backdrop-blur-sm rounded-xl p-6 border border-white/30">
-            <h4 className="font-semibold mb-2 text-white">Welcome to smarter decisions</h4>
-            <p className="text-sm text-white/80">
+          <div className="bg-primary/20 backdrop-blur-sm rounded-xl p-6 border border-primary/30">
+            <h4 className="font-semibold mb-2 text-foreground">Welcome to smarter decisions</h4>
+            <p className="text-sm text-muted-foreground">
               Our AI helps you make better choices by analyzing your context, preferences, and history. 
               Every decision includes a visual mind-map showing how we reached our recommendation.
             </p>

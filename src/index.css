@@ -10,13 +10,13 @@ All colors MUST be HSL.
   :root {
     /* Calm decision-making colors */
     --background: 210 40% 98%;
-    --foreground: 0 0% 100%;
+    --foreground: 220 15% 15%;
 
-    --card: 220 20% 95%;
-    --card-foreground: 220 15% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
 
-    --popover: 220 20% 95%;
-    --popover-foreground: 220 15% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
 
     /* Soft teal for clarity */
     --primary: 190 80% 50%;
@@ -24,10 +24,10 @@ All colors MUST be HSL.
 
     /* Warm peach for cooking */
     --secondary: 20 85% 65%;
-    --secondary-foreground: 220 15% 20%;
+    --secondary-foreground: 220 15% 15%;
 
-    --muted: 220 20% 88%;
-    --muted-foreground: 220 15% 40%;
+    --muted: 220 20% 92%;
+    --muted-foreground: 220 15% 35%;
 
     /* Soft blue-purple for accents */
     --accent: 200 70% 60%;
@@ -36,8 +36,8 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 80%;
-    --input: 220 20% 90%;
+    --border: 220 20% 85%;
+    --input: 0 0% 100%;
     --ring: 190 80% 50%;
 
     --radius: 0.75rem;
@@ -74,23 +74,23 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 215 28% 17%;
-    --foreground: 0 0% 100%;
+    --background: 215 28% 12%;
+    --foreground: 220 15% 95%;
 
-    --card: 220 20% 95%;
-    --card-foreground: 220 15% 20%;
+    --card: 220 20% 18%;
+    --card-foreground: 220 15% 95%;
 
-    --popover: 220 20% 95%;
-    --popover-foreground: 220 15% 20%;
+    --popover: 220 20% 18%;
+    --popover-foreground: 220 15% 95%;
 
     --primary: 190 80% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 20 85% 65%;
-    --secondary-foreground: 220 15% 20%;
+    --secondary-foreground: 220 15% 15%;
 
-    --muted: 220 20% 88%;
-    --muted-foreground: 220 15% 40%;
+    --muted: 220 20% 25%;
+    --muted-foreground: 220 15% 70%;
 
     --accent: 200 70% 60%;
     --accent-foreground: 0 0% 100%;
@@ -98,8 +98,8 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 80%;
-    --input: 220 20% 90%;
+    --border: 220 20% 30%;
+    --input: 220 20% 25%;
     --ring: 190 80% 50%;
     
     --gradient-primary: linear-gradient(135deg, hsl(190 80% 50%), hsl(200 70% 60%));
