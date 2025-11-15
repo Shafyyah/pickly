@@ -53,6 +53,13 @@ export const SuggestionCard = ({
   
   const expanded = externalExpanded !== undefined ? externalExpanded : internalExpanded;
 
+  // Helper function to render markdown italics
+  const renderMarkdownItalics = (text: string) => {
+    // Convert markdown italics (*text* or _text_) to HTML <em> tags
+    const html = text.replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/_([^_]+)_/g, '<em>$1</em>');
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  };
+
   const handleDoIt = () => {
     if (externalExpanded === undefined) {
       setInternalExpanded(true);
@@ -170,7 +177,9 @@ export const SuggestionCard = ({
           {details.description && (
             <div>
               <h4 className="font-semibold mb-2">Details:</h4>
-              <p className="text-sm text-muted-foreground">{details.description}</p>
+              <p className="text-sm text-muted-foreground whitespace-pre-line">
+                {renderMarkdownItalics(details.description)}
+              </p>
             </div>
           )}
 

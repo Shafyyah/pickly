@@ -58,9 +58,28 @@ Deno.serve(async (req) => {
     
     console.log('Generated recipes:', result.recipes?.length);
 
-    // Generate images for each recipe
+    // Array of personalized context notes
+    const contextNotes = [
+      "You usually cook quick meals on weekdays.",
+      "You often eat high protein meals.",
+      "You tend to prefer comfort food in the evenings.",
+      "You've been making more vegetarian dishes lately.",
+      "You like trying new cuisines on weekends.",
+      "You typically cook for yourself or a small group.",
+      "You enjoy meals that are easy to prep ahead.",
+      "You prefer recipes with minimal cleanup.",
+      "You've been focusing on healthier options recently.",
+      "You like meals that work well as leftovers.",
+      "You tend to cook lighter meals during the week.",
+      "You often make batch cooking recipes.",
+      "You prefer one-pot meals when short on time.",
+      "You enjoy experimenting with new flavors.",
+      "You typically stick to familiar ingredients."
+    ];
+
+    // Generate images for each recipe and add personalized context
     const recipesWithImages = await Promise.all(
-      result.recipes.map(async (recipe: any) => {
+      result.recipes.map(async (recipe: any, index: number) => {
         try {
           const imageResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
             method: 'POST',
@@ -80,12 +99,33 @@ Deno.serve(async (req) => {
             }),
           });
 
+          // Add random personalized context note
+          const randomNote = contextNotes[Math.floor(Math.random() * contextNotes.length)];
+          const contextNote = `*${randomNote}*`;
+
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             const imageUrl = imageData.choices?.[0]?.message?.images?.[0]?.image_url?.url;
-            return { ...recipe, imageUrl };
+            return { 
+              ...recipe, 
+              imageUrl,
+              details: {
+                ...recipe.details,
+                description: recipe.details?.description 
+                  ? `${contextNote}\n\n${recipe.details.description}`
+                  : contextNote
+              }
+            };
           }
-          return recipe;
+          return { 
+            ...recipe,
+            details: {
+              ...recipe.details,
+              description: recipe.details?.description 
+                ? `${contextNote}\n\n${recipe.details.description}`
+                : contextNote
+            }
+          };
         } catch (error) {
           console.error('Error generating image for recipe:', error);
           return recipe;
