@@ -10,6 +10,7 @@ const Index = () => {
   const [user, setUser] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searching, setSearching] = useState(false);
+  const [decisionResult, setDecisionResult] = useState<any>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Index = () => {
     if (!searchQuery.trim()) return;
     
     setSearching(true);
+    setDecisionResult(null);
     try {
       const { data, error } = await supabase.functions.invoke("universal-search", {
         body: { query: searchQuery, userId: user.id },
@@ -50,9 +52,8 @@ const Index = () => {
 
       if (error) throw error;
       
+      setDecisionResult(data);
       toast.success("Decision generated!");
-      // You could navigate to a results page or show results in a dialog
-      console.log(data);
     } catch (error: any) {
       toast.error(error.message || "Failed to process search");
     }
@@ -92,6 +93,44 @@ const Index = () => {
               </Button>
             </div>
           </div>
+
+          {/* Decision Result */}
+          {decisionResult && (
+            <div className="bg-card rounded-2xl p-6 space-y-4" style={{ boxShadow: 'var(--shadow-card)' }}>
+              <div className="flex items-start gap-3">
+                <Sparkles className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">Decision</h3>
+                  <p className="text-foreground mb-4">{decisionResult.decision}</p>
+                  
+                  <h4 className="font-semibold mb-2">Why?</h4>
+                  <p className="text-muted-foreground mb-4">{decisionResult.reasoning}</p>
+                  
+                  {decisionResult.alternatives && decisionResult.alternatives.length > 0 && (
+                    <>
+                      <h4 className="font-semibold mb-2">Alternative Options:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                        {decisionResult.alternatives.map((alt: string, i: number) => (
+                          <li key={i}>{alt}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
+              </div>
+              
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setDecisionResult(null);
+                  setSearchQuery("");
+                }}
+                className="w-full"
+              >
+                Ask Another Question
+              </Button>
+            </div>
+          )}
 
           {/* Main Feature Buttons */}
           <div className="grid md:grid-cols-2 gap-6">
