@@ -39,6 +39,7 @@ Deno.serve(async (req) => {
             Return a JSON object with a "recipes" array. Each recipe should have:
             - title: string
             - summary: string (1 short, friendly sentence - keep it casual and appetizing!)
+            - contextNote: string (A personalized note about the user's cooking habits that is RELEVANT to this specific recipe. Examples: for a veggie dish "You've been making more vegetarian dishes lately", for a quick recipe "You usually cook quick meals on weekdays", for a protein-rich dish "You often eat high protein meals", for comfort food "You tend to prefer comfort food in the evenings". Make it sound personal and match the recipe type.)
             - details: object with ingredients (array), steps (array), time (string), tips (string)
             - imagePrompt: string (detailed description for generating an appetizing food photo of the finished dish)`
           }
@@ -58,32 +59,9 @@ Deno.serve(async (req) => {
     
     console.log('Generated recipes:', result.recipes?.length);
 
-    // Array of personalized context notes
-    const contextNotes = [
-      "You usually cook quick meals on weekdays.",
-      "You often eat high protein meals.",
-      "You tend to prefer comfort food in the evenings.",
-      "You've been making more vegetarian dishes lately.",
-      "You like trying new cuisines on weekends.",
-      "You typically cook for yourself or a small group.",
-      "You enjoy meals that are easy to prep ahead.",
-      "You prefer recipes with minimal cleanup.",
-      "You've been focusing on healthier options recently.",
-      "You like meals that work well as leftovers.",
-      "You tend to cook lighter meals during the week.",
-      "You often make batch cooking recipes.",
-      "You prefer one-pot meals when short on time.",
-      "You enjoy experimenting with new flavors.",
-      "You typically stick to familiar ingredients."
-    ];
-
-    // Shuffle and select unique notes for each recipe
-    const shuffledNotes = [...contextNotes].sort(() => Math.random() - 0.5);
-    const selectedNotes = shuffledNotes.slice(0, result.recipes.length);
-
-    // Generate images for each recipe and add personalized context
+    // Generate images for each recipe
     const recipesWithImages = await Promise.all(
-      result.recipes.map(async (recipe: any, index: number) => {
+      result.recipes.map(async (recipe: any) => {
         try {
           const imageResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
             method: 'POST',
@@ -103,8 +81,8 @@ Deno.serve(async (req) => {
             }),
           });
 
-          // Add unique personalized context note for this recipe
-          const contextNote = `*${selectedNotes[index]}*`;
+          // Format the context note from the AI
+          const contextNote = recipe.contextNote ? `*${recipe.contextNote}*` : "";
 
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
@@ -112,12 +90,12 @@ Deno.serve(async (req) => {
             return { 
               ...recipe, 
               imageUrl,
-              summary: `${contextNote}\n\n${recipe.summary}`
+              summary: contextNote ? `${contextNote}\n\n${recipe.summary}` : recipe.summary
             };
           }
           return { 
             ...recipe,
-            summary: `${contextNote}\n\n${recipe.summary}`
+            summary: contextNote ? `${contextNote}\n\n${recipe.summary}` : recipe.summary
           };
         } catch (error) {
           console.error('Error generating image for recipe:', error);
