@@ -80,14 +80,14 @@ const Activity = () => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
       <div className="container mx-auto px-4 py-8 relative z-10">
-        <Button variant="ghost" onClick={() => navigate("/")} className="mb-6 text-white hover:bg-white/20">
+        <Button variant="ghost" onClick={() => navigate("/")} className="mb-6 text-foreground hover:bg-muted">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
         </Button>
 
         {showSurvey ? (
           <div className="max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold text-white mb-8">
+            <h1 className="text-4xl font-bold text-foreground mb-8">
               Quick Preferences
             </h1>
             
@@ -195,14 +195,14 @@ const Activity = () => {
           <>
 
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-4xl font-bold text-foreground">
             What Should I Do?
           </h1>
           <Button
             onClick={() => generateActivities()}
             disabled={loading}
             variant="outline"
-            className="text-white border-white/30 hover:bg-white/20"
+            className="text-foreground border-border hover:bg-muted"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
             Refresh

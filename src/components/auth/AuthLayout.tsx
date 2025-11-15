@@ -20,10 +20,10 @@ export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
       </div>
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-white">
+          <h1 className="text-4xl font-bold mb-2 text-foreground">
             Pickly
           </h1>
-          <p className="text-white/80">{subtitle}</p>
+          <p className="text-muted-foreground">{subtitle}</p>
         </div>
         
         <div className="bg-card/90 backdrop-blur-md p-8 rounded-2xl border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
