@@ -114,7 +114,7 @@ export const SuggestionCard = ({
 
   return (
     <div
-      className={`bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 ${
+      className={`bg-card/30 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 ${
         expanded ? "scale-105" : ""
       }`}
       style={{ boxShadow: expanded ? 'var(--shadow-card)' : 'var(--shadow-soft)' }}

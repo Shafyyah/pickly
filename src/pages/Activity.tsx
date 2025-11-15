@@ -91,7 +91,7 @@ const Activity = () => {
               Quick Preferences
             </h1>
             
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-8 space-y-8 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-8 space-y-8 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <div className="space-y-4">
                 <Label className="text-lg font-semibold">How's your energy level?</Label>
                 <RadioGroup value={surveyAnswers.energy} onValueChange={(v) => setSurveyAnswers({...surveyAnswers, energy: v})}>
@@ -211,7 +211,7 @@ const Activity = () => {
 
         <div className="max-w-4xl mx-auto space-y-6">
           {activities.length === 0 && !loading && (
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-12 text-center border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-12 text-center border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <p className="text-muted-foreground">Generating personalized activities for you...</p>
             </div>
           )}

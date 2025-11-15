@@ -144,7 +144,7 @@ const Dinner = () => {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Image Upload */}
           {!preview && (
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-12 text-center border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-12 text-center border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <input
                 type="file"
                 accept="image/*"
@@ -169,7 +169,7 @@ const Dinner = () => {
 
           {/* Image Preview */}
           {preview && !ingredients.length && (
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <img
                 src={preview}
                 alt="Fridge contents"
@@ -195,7 +195,7 @@ const Dinner = () => {
 
           {/* Ingredients List */}
           {ingredients.length > 0 && !recipes.length && (
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <h3 className="text-xl font-semibold mb-4">Detected Ingredients</h3>
               <div className="flex flex-wrap gap-2 mb-6">
                 {ingredients.map((ingredient, i) => (

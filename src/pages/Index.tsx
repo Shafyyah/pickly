@@ -112,7 +112,7 @@ const Index = () => {
 
         <div className="max-w-2xl mx-auto space-y-8">
           {/* Universal Search Bar */}
-          <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+          <div className="bg-card/30 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
             <h2 className="text-2xl font-bold mb-4 text-foreground">What decision do you need help with?</h2>
             <div className="flex gap-3">
               <Input
@@ -131,7 +131,7 @@ const Index = () => {
 
           {/* Chat History */}
           {showChat && (
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 space-y-4 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="bg-card/30 backdrop-blur-md rounded-2xl p-6 space-y-4 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 {chatHistory.map((message, i) => (
                   <div key={i} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -183,7 +183,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <button
               onClick={() => navigate("/dinner")}
-              className="group bg-card/90 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
+              className="group bg-card/30 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
               style={{ boxShadow: 'var(--shadow-card)' }}
             >
               <div className="flex items-center gap-4 mb-4">
@@ -199,7 +199,7 @@ const Index = () => {
 
             <button
               onClick={() => navigate("/activity")}
-              className="group bg-card/90 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
+              className="group bg-card/30 backdrop-blur-md rounded-2xl p-8 text-left transition-all hover:scale-105 border border-white/20"
               style={{ boxShadow: 'var(--shadow-card)' }}
             >
               <div className="flex items-center gap-4 mb-4">
