@@ -77,6 +77,10 @@ Deno.serve(async (req) => {
       "You typically stick to familiar ingredients."
     ];
 
+    // Shuffle and select unique notes for each recipe
+    const shuffledNotes = [...contextNotes].sort(() => Math.random() - 0.5);
+    const selectedNotes = shuffledNotes.slice(0, result.recipes.length);
+
     // Generate images for each recipe and add personalized context
     const recipesWithImages = await Promise.all(
       result.recipes.map(async (recipe: any, index: number) => {
@@ -99,9 +103,8 @@ Deno.serve(async (req) => {
             }),
           });
 
-          // Add random personalized context note
-          const randomNote = contextNotes[Math.floor(Math.random() * contextNotes.length)];
-          const contextNote = `*${randomNote}*`;
+          // Add unique personalized context note for this recipe
+          const contextNote = `*${selectedNotes[index]}*`;
 
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
