@@ -183,8 +183,7 @@ const Index = () => {
           <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-white/20">
             <h4 className="font-bold mb-2 text-card-foreground text-lg">Welcome to smarter decisions</h4>
             <p className="text-sm text-card-foreground/90">
-              Our AI helps you make better choices by analyzing your context, preferences, and history. 
-              Every decision includes a visual mind-map showing how we reached our recommendation.
+              Our AI helps you make better choices by analyzing your context, preferences, and history.
             </p>
           </div>
         </div>
