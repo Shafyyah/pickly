@@ -206,17 +206,20 @@ const Dinner = () => {
               ) : (
                 <>
                   {recipes.map((recipe, i) => (
-                    <SuggestionCard
-                      key={i}
-                      title={recipe.title}
-                      summary={recipe.summary}
-                      details={recipe.details}
-                      imageUrl={recipe.imageUrl}
-                      onDoIt={() => console.log("Do it")}
-                      onChatMessage={(msg) => console.log("Chat:", msg)}
-                      loading={loading}
-                      expanded={expandedIndex === i}
-                    />
+                <SuggestionCard
+                  key={i}
+                  title={recipe.title}
+                  summary={recipe.summary}
+                  details={recipe.details}
+                  imageUrl={recipe.imageUrl}
+                  onDoIt={() => {
+                    setPickedIndex(i);
+                    toast.success(`Let's make: ${recipe.title}`);
+                  }}
+                  onChatMessage={(msg) => console.log("Chat:", msg)}
+                  loading={loading}
+                  expanded={expandedIndex === i}
+                />
                   ))}
                   
                   {/* Action Buttons at the end */}
