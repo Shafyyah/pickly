@@ -30,21 +30,52 @@ Deno.serve(async (req) => {
         messages: [
           {
             role: 'system',
-            content: 'You are a friendly recipe assistant. Generate 3 recipe suggestions based on available ingredients. Keep descriptions casual, fun, and inviting - like chatting with a foodie friend!'
+            content: 'You are a friendly recipe assistant. Generate 3 recipe suggestions based on available ingredients.'
           },
           {
             role: 'user',
-            content: `Generate 3 recipes using these ingredients: ${ingredients.join(', ')}. 
-            
-            Return a JSON object with a "recipes" array. Each recipe should have:
-            - title: string
-            - summary: string (1 short, friendly sentence - keep it casual and appetizing!)
-            - contextNote: string (A personalized note about the user's cooking habits that is RELEVANT to this specific recipe. Examples: for a veggie dish "You've been making more vegetarian dishes lately", for a quick recipe "You usually cook quick meals on weekdays", for a protein-rich dish "You often eat high protein meals", for comfort food "You tend to prefer comfort food in the evenings". Make it sound personal and match the recipe type.)
-            - details: object with ingredients (array), steps (array), time (string), tips (string)
-            - imagePrompt: string (detailed description for generating an appetizing food photo of the finished dish)`
+            content: `Generate 3 recipes using these ingredients: ${ingredients.join(', ')}. For each recipe, create a personalized context note about cooking habits that matches the recipe type (e.g., for veggie dishes mention vegetarian cooking, for quick recipes mention weekday meals, for protein-rich mention high protein preferences).`
           }
         ],
-        response_format: { type: 'json_object' }
+        tools: [
+          {
+            type: "function",
+            function: {
+              name: "generate_recipes",
+              description: "Generate recipe suggestions with personalized context",
+              parameters: {
+                type: "object",
+                properties: {
+                  recipes: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        title: { type: "string", description: "Recipe name" },
+                        summary: { type: "string", description: "Short, friendly sentence about the recipe" },
+                        contextNote: { type: "string", description: "Personalized note about user cooking habits relevant to this recipe" },
+                        details: {
+                          type: "object",
+                          properties: {
+                            ingredients: { type: "array", items: { type: "string" } },
+                            steps: { type: "array", items: { type: "string" } },
+                            time: { type: "string" },
+                            tips: { type: "string" }
+                          },
+                          required: ["ingredients", "steps", "time", "tips"]
+                        },
+                        imagePrompt: { type: "string", description: "Detailed description for food photo" }
+                      },
+                      required: ["title", "summary", "contextNote", "details", "imagePrompt"]
+                    }
+                  }
+                },
+                required: ["recipes"]
+              }
+            }
+          }
+        ],
+        tool_choice: { type: "function", function: { name: "generate_recipes" } }
       }),
     });
 
@@ -55,8 +86,14 @@ Deno.serve(async (req) => {
     }
 
     const data = await response.json();
-    const result = JSON.parse(data.choices[0].message.content);
     
+    // Extract structured data from tool call
+    const toolCall = data.choices[0].message.tool_calls?.[0];
+    if (!toolCall) {
+      throw new Error('No tool call in response');
+    }
+    
+    const result = JSON.parse(toolCall.function.arguments);
     console.log('Generated recipes:', result.recipes?.length);
 
     // Generate images for each recipe
