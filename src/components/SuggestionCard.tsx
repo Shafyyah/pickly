@@ -159,7 +159,7 @@ export const SuggestionCard = ({
 
           {(details.time || details.duration) && <div className="flex items-center gap-2 text-sm">
               <span className="font-semibold">Time:</span>
-              <span className="text-muted-foreground">{details.time || details.duration}</span>
+              <span className="text-slate-50">{details.time || details.duration}</span>
             </div>}
 
           {details.tips && <div className="bg-card/20 rounded-lg p-3">
