@@ -17,6 +17,94 @@ Deno.serve(async (req) => {
       throw new Error('LOVABLE_API_KEY not configured');
     }
 
+    // Check for hardcoded path: moderate, small group, outdoors, creative, under $20
+    if (
+      preferences?.energy === 'moderate' &&
+      preferences?.social === 'small' &&
+      preferences?.location === 'outdoors' &&
+      preferences?.type === 'creative' &&
+      preferences?.budget === 'under20'
+    ) {
+      console.log('Using hardcoded activities for specific preference combination');
+      
+      const hardcodedActivities = [
+        {
+          title: "Nature Walk",
+          summary: "Take a peaceful walk through nature, breathing fresh air and enjoying the scenery.",
+          details: {
+            description: "A relaxing outdoor experience perfect for moderate energy levels. Walk through local parks or trails with a small group of friends.",
+            duration: "1-2 hours",
+            instructions: [
+              "Choose a nearby park or nature trail",
+              "Invite 2-3 friends to join",
+              "Wear comfortable walking shoes",
+              "Bring water and enjoy the journey"
+            ]
+          },
+          imageUrl: "/activities/nature-walk.png",
+          mindMapNodes: [
+            { label: "moderate energy", type: "input" },
+            { label: "small group", type: "context" },
+            { label: "outdoors", type: "context" },
+            { label: "creative", type: "analysis" },
+            { label: "under $20", type: "context" },
+            { label: "Nature Walk", type: "final" }
+          ]
+        },
+        {
+          title: "Outdoor Photography",
+          summary: "Capture beautiful moments in nature with your camera or smartphone.",
+          details: {
+            description: "Express your creativity through photography while exploring the outdoors with friends. Perfect for those who want to combine art with nature.",
+            duration: "2-3 hours",
+            instructions: [
+              "Grab your camera or smartphone",
+              "Meet with friends at a scenic location",
+              "Experiment with different angles and lighting",
+              "Share and discuss your favorite shots"
+            ]
+          },
+          imageUrl: "/activities/outdoor-photography.png",
+          mindMapNodes: [
+            { label: "moderate energy", type: "input" },
+            { label: "small group", type: "context" },
+            { label: "outdoors", type: "context" },
+            { label: "creative", type: "analysis" },
+            { label: "under $20", type: "context" },
+            { label: "Outdoor Photography", type: "final" }
+          ]
+        },
+        {
+          title: "Sketch Local Landmarks",
+          summary: "Bring your sketchbook outside and draw the architecture and landmarks around you.",
+          details: {
+            description: "A creative outdoor activity that combines art and exploration. Perfect for a small group looking to express themselves artistically.",
+            duration: "1.5-2.5 hours",
+            instructions: [
+              "Bring sketchbooks and drawing materials",
+              "Choose a landmark or interesting location",
+              "Sit comfortably and start sketching",
+              "Share your artwork with the group"
+            ]
+          },
+          imageUrl: "/activities/sketch-landmarks.png",
+          mindMapNodes: [
+            { label: "moderate energy", type: "input" },
+            { label: "small group", type: "context" },
+            { label: "outdoors", type: "context" },
+            { label: "creative", type: "analysis" },
+            { label: "under $20", type: "context" },
+            { label: "Sketch Local Landmarks", type: "final" }
+          ]
+        }
+      ];
+
+      return new Response(
+        JSON.stringify({ activities: hardcodedActivities }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const currentHour = new Date().getHours();
     const timeOfDay = currentHour < 12 ? 'morning' : currentHour < 17 ? 'afternoon' : 'evening';
 
