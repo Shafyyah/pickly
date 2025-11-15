@@ -135,7 +135,9 @@ export const SuggestionCard = ({
         )}
         <div className="flex-1">
           <h3 className="text-xl font-semibold mb-2">{title}</h3>
-          <p className="text-muted-foreground">{summary}</p>
+          <p className="text-muted-foreground whitespace-pre-line">
+            {renderMarkdownItalics(summary)}
+          </p>
         </div>
       </div>
 

@@ -109,22 +109,12 @@ Deno.serve(async (req) => {
             return { 
               ...recipe, 
               imageUrl,
-              details: {
-                ...recipe.details,
-                description: recipe.details?.description 
-                  ? `${contextNote}\n\n${recipe.details.description}`
-                  : contextNote
-              }
+              summary: `${contextNote}\n\n${recipe.summary}`
             };
           }
           return { 
             ...recipe,
-            details: {
-              ...recipe.details,
-              description: recipe.details?.description 
-                ? `${contextNote}\n\n${recipe.details.description}`
-                : contextNote
-            }
+            summary: `${contextNote}\n\n${recipe.summary}`
           };
         } catch (error) {
           console.error('Error generating image for recipe:', error);
