@@ -27,7 +27,7 @@ Secure user accounts with email/password authentication, allowing personalized e
 - **Backend**: Lovable Cloud (Supabase)
 - **Database**: PostgreSQL with Row Level Security
 - **Authentication**: Supabase Auth
-- **AI**: Lovable AI (Gemini & GPT models)
+- **AI**: Gemini & GPT models
 - **Routing**: React Router v6
 - **State Management**: TanStack Query
 
@@ -106,12 +106,6 @@ The app uses the following main tables:
 - `analyze-ingredients` - Analyzes fridge photos for ingredients
 - `chat-modify` - Manages conversational AI interactions
 
-## Deployment
-
-### Via Lovable
-1. Click the "Publish" button in the Lovable editor
-2. Click "Update" to deploy frontend changes
-3. Backend changes deploy automatically
 
 ### Self-Hosting
 This app can be deployed to any static hosting platform:
@@ -122,24 +116,10 @@ This app can be deployed to any static hosting platform:
 
 Make sure to configure environment variables in your hosting platform.
 
-## Contributing
 
-This project was created with [Lovable](https://lovable.dev). To contribute:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
 
 ## License
 
 This project is open source and available under the MIT License.
 
-## Support
 
-For questions or issues, please open an issue in the GitHub repository or visit [Lovable Documentation](https://docs.lovable.dev).
-
-## Acknowledgments
-
-- Built with [Lovable](https://lovable.dev)
-- UI components from [shadcn/ui](https://ui.shadcn.com)
-- Backend powered by Lovable Cloud
