@@ -113,7 +113,7 @@ const Index = () => {
         <div className="max-w-2xl mx-auto space-y-8">
           {/* Universal Search Bar */}
           <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-white/20" style={{ boxShadow: 'var(--shadow-card)' }}>
-            <h2 className="text-2xl font-semibold mb-4">What decision do you need help with?</h2>
+            <h2 className="text-2xl font-bold mb-4 text-foreground">What decision do you need help with?</h2>
             <div className="flex gap-3">
               <Input
                 placeholder="e.g., Should I go out tonight or stay in?"
